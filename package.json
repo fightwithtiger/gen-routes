@@ -12,7 +12,7 @@
   "author": "deng_tuo <2284925818@qq.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fightwithtiger/easy-use-canvas.git"
+    "url": "https://github.com/fightwithtiger/gen-routes.git"
   },
   "funding": "https://github.com/fightwithtiger",
   "main": "./dist/index.cjs",

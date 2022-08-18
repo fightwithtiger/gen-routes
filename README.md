@@ -5,4 +5,4 @@
 
 ## License
 
-[MIT](./LICENSE) License © 2021 [Anthony Fu](https://github.com/fightwithtiger)
+[MIT](./LICENSE) License © 2021 [fightwithtiger](https://github.com/fightwithtiger)
