@@ -1,0 +1,50 @@
+{
+  "env": {
+      "browser": true,
+      "es2021": true,
+      "commonjs": true,
+      "es6": true,
+      "node": true
+  },
+  "parser": "vue-eslint-parser",
+  "extends": [
+      // "eslint:recommended",
+      // "plugin:vue/vue3-essential",
+      // "plugin:@typescript-eslint/recommended"
+  ],
+  "parserOptions": {
+      "ecmaVersion": "latest",
+      "parser": "@typescript-eslint/parser",
+      "sourceType": "module"
+  },
+  "plugins": [
+      "vue",
+      "@typescript-eslint"
+  ],
+  "rules": {
+    "indent": ["error", 2], // 缩进2个空格
+    "semi": ["error", "never"], // 要求或禁止使用分号代替 ASI,即禁用行尾使用分号
+    "quotes": ["error", "single"], // 使用单引号
+    "no-mixed-spaces-and-tabs": [2], // 禁止空格和 tab 的混合缩进
+    "no-extra-semi": ["error"], // 禁止不必要的分号
+    "comma-dangle": ["error", "never"], // 禁止末尾逗号
+    "no-console": "warn",
+    "eqeqeq": ["error", "always", {
+      "null": "ignore"
+    }], //必须使用全等  0关 1警告 2或者error错误
+    "no-const-assign": 2, //禁止修改const声明的变量 - 开启
+    "no-empty": 0, //块语句中的内容不能为空 - 关闭
+    "no-spaced-func": 2, //函数调用时 函数名与()之间不能有空格 - 开启
+    "no-undef": 2, //不能有未定义的变量 - 打开
+    "no-unused-vars": ["warn" , {
+      "vars": "all",
+      "args": "none",
+      "argsIgnorePattern": "^_"
+    }], //不能有声明后未被使用的变量或参数 0关 1警告 2声明不使用就爆红
+    "space-before-function-paren": ["off", "never"],
+    "object-curly-spacing": [2, "always", {
+      "objectsInObjects" : false
+    }],
+    "array-bracket-spacing": [2, "never"]
+  }
+}
