@@ -1,7 +1,8 @@
 import { createRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-router'
 import type { Page } from '../../../src'
-// import { createRoutesGenerator } from '../../../src'
-import { createRoutesGenerator } from '../../../dist'
+import { createRoutesGenerator } from '../../../src'
+// import { createRoutesGenerator } from '../../../dist'
+// import { createRoutesGenerator } from 'gen-routes'
 import { getPages } from '../mock/index'
 
 let pages: Page[] | null = null
@@ -54,10 +55,14 @@ const router = createRouter({
 })
 
 // custom action
-// const action = (router: Router, matching: RouteRecordRaw[]) => {
-// }
+const action = (router: Router, matching: RouteRecordRaw[]) => {
+  for (let route of matching) {
+    console.log('customize Action')
+    router.addRoute(route)
+  }
+}
 
-const generate = createRoutesGenerator()(dynamicRoutes)
+const generate = createRoutesGenerator(action)(dynamicRoutes)
 
 router.beforeEach(async (to, from , next) => {
   if(!pages) {
