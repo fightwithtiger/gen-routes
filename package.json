@@ -1,6 +1,6 @@
 {
   "name": "gen-routes",
-  "version": "0.0.4",
+  "version": "0.0.2",
   "packageManager": "pnpm@6.32.3",
   "description": "Dynamically generate routes based on the pages that can be viewed by the role. Used it in vue、vue-router program.",
   "keywords": [
