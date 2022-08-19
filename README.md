@@ -1,6 +1,6 @@
-# [name]
+# gen-routes
 
-[![NPM version](https://img.shields.io/npm/v/[name]?color=a1b858&label=)](https://www.npmjs.com/package/[name])
+[![NPM version](https://img.shields.io/npm/v/gen-routes?color=a1b858&label=)](https://www.npmjs.com/package/gen-routes)
 
 ## Install
 
@@ -69,11 +69,9 @@ const router = createRouter({
 // initialize generate method by dynamicRoutes
 const generate = createRoutesGenerator()(dynamicRoutes)
 
-
 router.beforeEach(async (to, from , next) => {
   if(!pages) {
-      
-     // Get the pages that role can read
+    // Get the pages that role can read
     pages = await getPages()
     
     // Compare the routing page that the user can see with dynamicRoutes and add it to the routes
@@ -83,7 +81,6 @@ router.beforeEach(async (to, from , next) => {
     next()
   }
 })
-
 
 export default router
 
@@ -141,7 +138,7 @@ pages: `['page1', 'page3']`
 
 So, the final new routes are `['page1', 'page2']`. Also, gen-routes supports children route.
 
-## implementation
+## Implementation
 
 If read the source code, you'll find this codes:
 
@@ -162,7 +159,7 @@ And you can customize the action method, write codes like this:
 const action = (router: Router, matching: RouteRecordRaw[]) => {
    // you can customize how to add matching routes to the router
   for (let route of matching) {
-     console.log('customize Action')
+    console.log('customize Action')
     router.addRoute(route)
   }
 }

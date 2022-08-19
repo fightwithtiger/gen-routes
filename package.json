@@ -2,8 +2,8 @@
   "name": "gen-routes",
   "version": "0.0.2",
   "packageManager": "pnpm@6.32.3",
-  "description": "",
-  "keywords": [],
+  "description": "Dynamically generate routes based on the pages that can be viewed by the role. Used it in vue、vue-router program.",
+  "keywords": ["gen-routes", "dynamic routes", "vue-router"],
   "homepage": "https://github.com/fightwithtiger",
   "bugs": {
     "url": "https://github.com/fightwithtiger/gen-routes/issues"
