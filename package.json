@@ -1,9 +1,13 @@
 {
   "name": "gen-routes",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "packageManager": "pnpm@6.32.3",
   "description": "Dynamically generate routes based on the pages that can be viewed by the role. Used it in vue、vue-router program.",
-  "keywords": ["gen-routes", "dynamic routes", "vue-router"],
+  "keywords": [
+    "gen-routes",
+    "dynamic routes",
+    "vue-router"
+  ],
   "homepage": "https://github.com/fightwithtiger",
   "bugs": {
     "url": "https://github.com/fightwithtiger/gen-routes/issues"
@@ -42,15 +46,13 @@
     "build": "rimraf dist && unbuild",
     "dev": "unbuild --stub",
     "lint": "eslint .",
-    "prepublishOnly": "nr build",
+    "prepublishOnly": "pnpm build",
     "release": "bumpp --commit --push --tag && pnpm publish",
     "start": "esno src/index.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.18.9",
-    "@antfu/ni": "^0.13.2",
     "@babel/types": "^7.17.0",
     "@types/node": "^17.0.23",
     "bumpp": "^7.1.1",
