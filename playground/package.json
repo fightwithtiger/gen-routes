@@ -9,9 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "gen-routes": "workspace:^0.0.3",
     "vue": "^3.2.37",
-    "vue-router": "4.1.3"
+    "vue-router": "4.0.16"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.3",
