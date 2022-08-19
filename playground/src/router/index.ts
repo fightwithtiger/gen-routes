@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-
 import type { Page } from '../../../src'
 // import { createRoutesGenerator } from '../../../src'
 import { createRoutesGenerator } from '../../../dist'
-import { getPages } from '../mock/indext'
+import { getPages } from '../mock/index'
 
 let pages: Page[] | null = null
 

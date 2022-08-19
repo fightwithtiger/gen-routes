@@ -10,9 +10,9 @@ const pages = [
         name: 'page1',
         zhName: '页面1',
         isMenu: true,
-        children: [],
-      },
-    ],
+        children: []
+      }
+    ]
   },
   {
     id: 2,
@@ -32,10 +32,10 @@ const pages = [
         name: 'page3',
         zhName: 'page3',
         isMenu: false,
-        children: [],
-      },
-    ],
-  },
+        children: []
+      }
+    ]
+  }
 ]
 
 export const getPages = () => {
