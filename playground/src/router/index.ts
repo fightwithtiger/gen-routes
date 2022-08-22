@@ -1,10 +1,10 @@
 import { createRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-router'
-// import type { Page } from '../../../src'
+import type { MaybePage } from '../../../src'
 import { createRoutesGenerator } from '../../../src'
 // import { createRoutesGenerator } from '../../../dist'
 import { getPages } from '../mock/index'
 
-let pages: any[] | null = null
+let pages: MaybePage[] | null = null
 
 const baseRoutes = [
   {

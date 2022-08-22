@@ -10,11 +10,11 @@
 
 ```typescript
 import { createRouter, createWebHashHistory } from 'vue-router'
-import type { Page } from 'gen-routes
+import type { MaybePage } from 'gen-routes'
 import { createRoutesGenerator } from 'gen-routes'
 import { getPages } from '../mock/index'
 
-let pages: Page[] | null = null
+let pages: MaybePage[] | null = null
 
 // Routes that can be accessed without configuring permissions
 const baseRoutes = [
@@ -93,31 +93,23 @@ The format of Pages should be:
 ```typescript
 const pages = [
   {
-    id: 1,
     name: 'menu1',
-    zhName: '菜单一',
-    isMenu: true,
+    title: '菜单一',
     children: [
       {
-        id: 11,
         name: 'page1',
-        zhName: '页面1',
-        isMenu: true,
+        title: '页面1',
         children: []
       }
     ]
   },
   {
-    id: 2,
     name: 'menu2',
-    zhName: '菜单二',
-    isMenu: true,
+    title: '菜单二',
     children: [
       {
-        id: 22,
         name: 'page3',
-        zhName: 'page3',
-        isMenu: false,
+        title: '页面3',
         children: []
       }
     ]
@@ -137,6 +129,71 @@ dynamicRoutes: `['page1', 'page2', 'page3']`
 pages: `['page1', 'page3']`
 
 So, the final new routes are `['page1', 'page2']`. Also, gen-routes supports children route.
+
+### Alias
+
+The format of Pages is:
+
+```typescript
+{
+	name: '',
+	title: '',
+	children: ''
+}
+```
+
+But sometimes the database stores a field with a different name, so the alias parameter is provided. For example, I change the title to 'zhName':
+
+```typescript
+// provide pages
+const pages = [
+  {
+    name: 'menu1',
+    zhName: '菜单一',
+    children: [
+      {
+        name: 'page1',
+        zhName: '页面1',
+        children: []
+      }
+    ]
+  },
+  {
+    name: 'menu2',
+    zhName: '菜单二',
+    children: [
+      {
+        name: 'page3',
+        zhName: '页面3',
+        children: []
+      }
+    ]
+  }
+]
+
+// router/index.ts
+router.beforeEach(async (to, from , next) => {
+  if(!pages) {
+    pages = await getPages()
+    
+    // customize alias for page
+    const alias = {
+      title: 'zhName',
+    }
+    generate(router, pages, alias)
+    next({ ...to })
+  }else {
+    document.title = to.meta.title as string
+    next()
+  }
+})
+
+
+```
+
+### Notice
+
+**<font color='red'>gen-routes relies on only three attributes: name(router-name), title(router-meta-title), children(router-children), so, please do not overwrite these three property names!</font>**
 
 ## Implementation
 
@@ -166,6 +223,7 @@ const action = (router: Router, matching: RouteRecordRaw[]) => {
 
 const generate = createRoutesGenerator(action)(dynamicRoutes)
 ```
+
 
 
 
