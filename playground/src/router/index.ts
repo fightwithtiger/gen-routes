@@ -1,10 +1,10 @@
 import { createRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-router'
-import type { Page } from '../../../src'
+// import type { Page } from '../../../src'
 import { createRoutesGenerator } from '../../../src'
 // import { createRoutesGenerator } from '../../../dist'
 import { getPages } from '../mock/index'
 
-let pages: Page[] | null = null
+let pages: any[] | null = null
 
 const baseRoutes = [
   {
@@ -66,9 +66,13 @@ const generate = createRoutesGenerator(action)(dynamicRoutes)
 router.beforeEach(async (to, from , next) => {
   if(!pages) {
     pages = await getPages()
-    generate(router, pages)
+    const alias = {
+      title: 'zhName',
+    }
+    generate(router, pages, alias)
     next({ ...to })
   }else {
+    document.title = to.meta.title as string
     next()
   }
 })

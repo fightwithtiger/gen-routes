@@ -30,7 +30,7 @@ const pages = [
       {
         id: 22,
         name: 'page3',
-        zhName: 'page3',
+        zhName: '页面3',
         isMenu: false,
         children: []
       }

@@ -1,25 +1,37 @@
 import type { RouteRecordRaw, Router } from 'vue-router'
 
 export interface Page {
-  id: number
   name: string
-  zhName: string
-  isMenu: boolean
+  title: string
   children: Page[]
 }
 
-export type PageName = Pick<Page, 'name' | 'zhName'>
+export type PageName = Pick<Page, 'name' | 'title'>
 
 export type ActionType = (router: Router, mathing: RouteRecordRaw[]) => void
 
+type TransferAny<T extends Record<string, any>> = {
+  [K in keyof T]: any
+}
+
+export type PropsAlias = Partial<TransferAny<Page>>
+
+export type MaybePage = Page | Record<string, any>
+
 let _action: ActionType | null = null
+
+let _alias: PropsAlias | null = null
 
 export function createRoutesGenerator(action?: ActionType) {
   _action = action ? action : defaultAction
 
   const generator = (dynamicRoutes: RouteRecordRaw[]) => {
-    return function (router: Router, pages: Page[]) {
+    return function (router: Router, pages: MaybePage[], alias?: PropsAlias) {
+      if(alias) {
+        _alias = alias
+      }
       const matching = getMatchingRoutes(pages, dynamicRoutes)
+
       _action!(router, matching)
     }
   }
@@ -33,7 +45,7 @@ function defaultAction(router: Router, matching: RouteRecordRaw[]) {
   }
 }
 
-function getMatchingRoutes(pages: Page[], dynamicRoutes: RouteRecordRaw[]) {
+function getMatchingRoutes(pages: MaybePage[], dynamicRoutes: RouteRecordRaw[]) {
   const pageNames = resolvePages(pages)
   const matching = match(dynamicRoutes, pageNames)
 
@@ -54,7 +66,7 @@ function match(origin: RouteRecordRaw[], pageNames: PageName[], matching: RouteR
         matching[idx].meta = {}
       }
       matching[idx].meta!.needLogin = true
-      matching[idx].meta!.title = pageNames.find(i => i.name === item.name)?.zhName || matching[idx].meta!.title || ''
+      matching[idx].meta!.title = pageNames.find(i => i.name === item.name)?.title || matching[idx].meta!.title || ''
       matching[idx].children = []
 
       if (item.children && item.children.length > 0) {
@@ -66,7 +78,7 @@ function match(origin: RouteRecordRaw[], pageNames: PageName[], matching: RouteR
   return matching
 }
 
-function resolvePages(pages: Page[]) {
+function resolvePages(pages: MaybePage[]) {
   const routeNames: PageName[] = []
 
   for (let page of pages) {
@@ -75,17 +87,27 @@ function resolvePages(pages: Page[]) {
 
   return routeNames
 
-  function resolvePage(page: Page) {
+  function resolvePage(page: MaybePage) {
+    updateAlias(page)
     if (!page.children || page.children.length === 0) {
       routeNames.push({
         name: page.name,
-        zhName: page.zhName
+        title: page.title
       })
       return
     }
 
     for (let p of page.children) {
       resolvePage(p)
+    }
+  }
+}
+
+function updateAlias(page: Record<string , any>) {
+  if(_alias) {
+    for(let key in _alias) {
+      const realKey = _alias[key as keyof PropsAlias]
+      page[key] = page[realKey]
     }
   }
 }
