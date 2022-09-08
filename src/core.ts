@@ -52,7 +52,7 @@ function getMatchingRoutes(pages: MaybePage[], dynamicRoutes: RouteRecordRaw[]) 
   return matching
 }
 
-function match(origin: RouteRecordRaw[], pageNames: PageName[], matching: RouteRecordRaw[] = []) {
+export function match(origin: RouteRecordRaw[], pageNames: PageName[], matching: RouteRecordRaw[] = []) {
   const routeNames = pageNames.map(i => i.name)
 
   for (let item of origin) {
@@ -78,7 +78,7 @@ function match(origin: RouteRecordRaw[], pageNames: PageName[], matching: RouteR
   return matching
 }
 
-function resolvePages(pages: MaybePage[]) {
+export function resolvePages(pages: MaybePage[]) {
   const routeNames: PageName[] = []
 
   for (let page of pages) {
