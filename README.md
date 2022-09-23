@@ -252,16 +252,16 @@ Menu1 here is only used to configure page permissions to represent a page hierar
 const pages = [
   {
     name: 'menu1',
-    title: '菜单一',
+    title: 'menu1',
     children: [
       {
-        name: 'parent,
-        title: '页面1',
+        name: 'parent',
+        title: 'parent',
         children: []
       },
        {
-        name: 'child,
-        title: '页面1',
+        name: 'child',
+        title: 'child',
         children: []
       }
     ]
@@ -269,7 +269,7 @@ const pages = [
 ]
 
 // your dynamic routes should like
-onst dynamicRoutes = [
+const dynamicRoutes = [
   {
     name: 'parent',
     path: '/parent',
@@ -278,7 +278,7 @@ onst dynamicRoutes = [
       title: 'parent'
     },
     children: [
-        name: 'child,
+        name: 'child',
         path: 'child',
         component: () => import('@/views/child.vue'),
         meta: {
