@@ -226,7 +226,68 @@ const action = (router: Router, matching: RouteRecordRaw[]) => {
 const generate = createRoutesGenerator(action)(dynamicRoutes)
 ```
 
+## Other
 
+All leaf nodes in the incoming data should correspond to a page route, which represents a menu-level should not appear in the route name, for example
+
+```javascript
+const pages = [
+  {
+    name: 'menu1',
+    title: 'menu1',
+    children: [
+      {
+        name: 'page1',
+        title: 'menu1',
+        children: []
+      }
+    ]
+  },
+]
+```
+
+Menu1 here is only used to configure page permissions to represent a page hierarchy, not a route, the real route should be page1. If your route involves child routes, such as: page: parent, whose child route is child, then you can set the returned Pages data as follows
+
+```javascript
+const pages = [
+  {
+    name: 'menu1',
+    title: '菜单一',
+    children: [
+      {
+        name: 'parent,
+        title: '页面1',
+        children: []
+      },
+       {
+        name: 'child,
+        title: '页面1',
+        children: []
+      }
+    ]
+  },
+]
+
+// your dynamic routes should like
+onst dynamicRoutes = [
+  {
+    name: 'parent',
+    path: '/parent',
+    component: () => import('@/views/parent.vue'),
+    meta: {
+      title: 'parent'
+    },
+    children: [
+        name: 'child,
+        path: 'child',
+        component: () => import('@/views/child.vue'),
+        meta: {
+          title: 'child'
+        },
+    ]
+  },
+ ]
+```
 
 
 ## License
