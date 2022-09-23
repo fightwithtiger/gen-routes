@@ -2,6 +2,8 @@
 
 [![NPM version](https://img.shields.io/npm/v/gen-routes?color=a1b858&label=)](https://www.npmjs.com/package/gen-routes)
 
+Dynamically generate routes based on the pages that can be viewed by the role. Used it in vue、vue-router program.
+
 ## Install
 
 `pnpm install gen-routes`
@@ -193,7 +195,7 @@ router.beforeEach(async (to, from , next) => {
 
 ### Notice
 
-**<font color='red'>gen-routes relies on only three attributes: name(router-name), title(router-meta-title), children(router-children), so, please do not overwrite these three property names!</font>**
+> **<font color='red'>gen-routes relies on only three attributes: name(router-name), title(router-meta-title), children(router-children), so, please do not overwrite these three property names!</font>**
 
 ## Implementation
 
@@ -229,4 +231,4 @@ const generate = createRoutesGenerator(action)(dynamicRoutes)
 
 ## License
 
-[MIT](./LICENSE) License © 2021 [fightwithtiger](https://github.com/fightwithtiger)
+[MIT](./LICENSE) License © 2022 [fightwithtiger](https://github.com/fightwithtiger)
